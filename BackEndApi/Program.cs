@@ -4,6 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using BackEndApi.Services.Contrato;
 using BackEndApi.Services.Implementacion;
 
+using AutoMapper;
+using BackEndApi.DTOs;
+using BackEndApi.Utilidades;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +21,8 @@ builder.Services.AddDbContext<DbempleadoContext>(options =>
 
 builder.Services.AddScoped<IDepartamentoService, DepartamentoService>();
 builder.Services.AddScoped<IEmpleadoService, EmpleadoService>();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 var app = builder.Build();
 
