@@ -24,6 +24,18 @@ builder.Services.AddScoped<IEmpleadoService, EmpleadoService>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("NuevaPolitica", app =>
+    {
+        app.AllowAnyOrigin();
+        app.AllowAnyHeader();
+        app.AllowAnyMethod();
+    });
+              
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -127,5 +139,6 @@ app.MapPost("/empleado/eliminar/{IdEmpleado}", async (
 
 #endregion peticiones API REST
 
+app.UseCors("NuevaPolitica");
 
 app.Run();
