@@ -74,3 +74,5 @@ C:\Users\charly\Desktop\Programacion\c#\AngularCrud\BackEndApi\BackEndApi\obj\De
 C:\Users\charly\Desktop\Programacion\c#\AngularCrud\BackEndApi\BackEndApi\obj\Debug\net7.0\BackEndApi.pdb
 C:\Users\charly\Desktop\Programacion\c#\AngularCrud\BackEndApi\BackEndApi\obj\Debug\net7.0\BackEndApi.genruntimeconfig.cache
 C:\Users\charly\Desktop\Programacion\c#\AngularCrud\BackEndApi\BackEndApi\obj\Debug\net7.0\ref\BackEndApi.dll
+C:\Users\charly\Desktop\Programacion\c#\AngularCrud\BackEndApi\BackEndApi\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\charly\Desktop\Programacion\c#\AngularCrud\BackEndApi\BackEndApi\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

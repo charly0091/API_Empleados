@@ -33,29 +33,99 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var summaries = new[]
+#region peticiones API REST
+app.MapGet("/departamento/lista", async (
+    IDepartamentoService _departamentoServicio,
+    IMapper _mapper) =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    List<Departamento> listaDepartamento = await _departamentoServicio.GetList();
+    List<DepartamentoDTO> listaDepartamentoDTO = _mapper.Map<List<DepartamentoDTO>>(listaDepartamento);
 
-app.MapGet("/weatherforecast", () =>
+    if(listaDepartamentoDTO.Count > 0)
+         return Results.Ok(listaDepartamentoDTO);
+    else
+        return Results.NotFound();
+
+});
+
+app.MapGet("/empleado/lista", async (
+    IEmpleadoService _empleadoservicio,
+    IMapper _mapper) =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+    List<Empleado> listaEmpleado = await _empleadoservicio.GetList();
+    List<EmpleadoDTO> listaEmpleadoDTO = _mapper.Map<List<EmpleadoDTO>>(listaEmpleado);
+
+    if (listaEmpleadoDTO.Count > 0)
+        return Results.Ok(listaEmpleadoDTO);
+    else
+        return Results.NotFound();
+
+});
+
+app.MapPost("/empleado/guardar", async (
+    EmpleadoDTO modelo,
+    IEmpleadoService _empleadoservicio,
+    IMapper _mapper
+    ) => {  
+        Empleado _empleado = _mapper.Map<Empleado>(modelo);
+        var _empleadoCreado = await _empleadoservicio.Add(_empleado);
+
+        if(_empleadoCreado.IdEmpleado != 0)
+            return Results.Ok(_mapper.Map<EmpleadoDTO>(_empleadoCreado));
+        else
+            return Results.StatusCode(StatusCodes.Status500InternalServerError);
+
+
+});
+
+
+app.MapPost("/empleado/actualizar/{IdEmpleado}", async (
+        int IdEmpleado,
+        EmpleadoDTO modelo,
+        IEmpleadoService _empleadoservicio,
+        IMapper _mapper
+    ) => {
+        
+        var _encontrado = await _empleadoservicio.Get(IdEmpleado);
+        if(_encontrado is null)
+            return Results.NotFound();
+
+        var _empleado = _mapper.Map<Empleado>(modelo);
+        _encontrado.NombreCompleto = _empleado.NombreCompleto;
+        _encontrado.IdDepartamento = _empleado.IdDepartamento;
+        _encontrado.Sueldo = _empleado.Sueldo;
+        _encontrado.FechaContrato = _empleado.FechaContrato;
+
+        var respuesta = await _empleadoservicio.Update(_encontrado);
+
+        if(respuesta)
+            return Results.Ok(_mapper.Map<EmpleadoDTO>(_encontrado));
+        else
+            return Results.StatusCode(StatusCodes.Status500InternalServerError);
+
+
+    });
+
+
+app.MapPost("/empleado/eliminar/{IdEmpleado}", async (
+    int IdEmpleado,
+    IEmpleadoService _empleadoservicio
+    ) => {
+
+        var _encontrado = await _empleadoservicio.Get(IdEmpleado);
+
+        if (_encontrado is null)
+            return Results.NotFound();
+
+        var respuesta = await _empleadoservicio.Delete(_encontrado);
+
+        if (respuesta)
+            return Results.Ok();
+        else
+            return Results.StatusCode(StatusCodes.Status500InternalServerError);
+    });
+
+#endregion peticiones API REST
+
 
 app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
