@@ -91,7 +91,7 @@ app.MapPost("/empleado/guardar", async (
 });
 
 
-app.MapPost("/empleado/actualizar/{IdEmpleado}", async (
+app.MapPut("/empleado/actualizar/{IdEmpleado}", async (
         int IdEmpleado,
         EmpleadoDTO modelo,
         IEmpleadoService _empleadoservicio,
@@ -119,7 +119,7 @@ app.MapPost("/empleado/actualizar/{IdEmpleado}", async (
     });
 
 
-app.MapPost("/empleado/eliminar/{IdEmpleado}", async (
+app.MapDelete("/empleado/eliminar/{IdEmpleado}", async (
     int IdEmpleado,
     IEmpleadoService _empleadoservicio
     ) => {

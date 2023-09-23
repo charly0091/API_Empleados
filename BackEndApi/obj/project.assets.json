@@ -3408,11 +3408,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\charly\\Desktop\\Programacion\\c#\\AngularCrud\\BackEndApi\\BackEndApi\\BackEndApi.csproj",
+      "projectUniqueName": "C:\\Users\\charly\\Desktop\\Programacion\\AngularCrud\\BackEndApi\\BackEndApi\\BackEndApi.csproj",
       "projectName": "BackEndApi",
-      "projectPath": "C:\\Users\\charly\\Desktop\\Programacion\\c#\\AngularCrud\\BackEndApi\\BackEndApi\\BackEndApi.csproj",
+      "projectPath": "C:\\Users\\charly\\Desktop\\Programacion\\AngularCrud\\BackEndApi\\BackEndApi\\BackEndApi.csproj",
       "packagesPath": "C:\\Users\\charly\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\charly\\Desktop\\Programacion\\c#\\AngularCrud\\BackEndApi\\BackEndApi\\obj\\",
+      "outputPath": "C:\\Users\\charly\\Desktop\\Programacion\\AngularCrud\\BackEndApi\\BackEndApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\charly\\AppData\\Roaming\\NuGet\\NuGet.Config",
